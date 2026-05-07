@@ -1,9 +1,4 @@
-# Homework 5: Secure Authentication System
-
-**Course:** CSC 436 – Web Applications, DePaul University  
-**Due:** Before Week 6 class  
-**Points:** 100  
-**Estimated Time:** 6–8 hours
+# Homework 6: Secure Authentication System
 
 ---
 
@@ -15,11 +10,9 @@ Authentication is the most security-critical feature in any web application. A s
 2. **Implement OAuth/OIDC** in the provided `insecure-auth-app/` using Authorization Code flow with PKCE.
 3. **Write a security report** reflecting on AI-generated auth code and the risks it introduces.
 
-> ⚠️ **Important:** This homework involves security-critical code. Do NOT copy/paste AI-generated auth code without understanding every line. You are responsible for the security of your implementation.
-
 ---
 
-## Part 1: Fix the Insecure Auth App (40 points)
+## Part 1: Fix the Insecure Auth App 
 
 You are provided a React front end and ASP.NET Core backend in `insecure-auth-app/` that simulate an OAuth-based authentication system. It contains **5 intentional security vulnerabilities**. Your job is to find each one, explain why it's dangerous, and fix it.
 
@@ -125,7 +118,7 @@ For **each** vulnerability, include in your submission:
 
 ---
 
-## Part 2: Implement OAuth/OIDC in `insecure-auth-app/` (40 points)
+## Part 2: Implement OAuth/OIDC in `insecure-auth-app/` 
 
 Implement OAuth 2.0 / OpenID Connect authentication in the same `insecure-auth-app/` React + ASP.NET Core application. Do not move this part to a separate course project. Your final app should replace or extend the mock OAuth flow with a real provider integration while keeping the React front end and ASP.NET Core backend architecture.
 
@@ -171,17 +164,17 @@ You **may** use AI tools (GitHub Copilot, ChatGPT, etc.) to scaffold your OAuth 
 
 ---
 
-## Part 3: Security Report (20 points)
+## Part 3: Security Report
 
 Write a security report (1–2 pages, markdown format) covering:
 
 ### Required Sections
 
-1. **AI Tools Used** (2 pts)
+1. **AI Tools Used** 
    - Which AI tool(s) did you use?
    - What prompts did you give for auth-related code?
 
-2. **Security Issues Found in AI-Generated Code** (10 pts)
+2. **Security Issues Found in AI-Generated Code** 
    - Identify a **minimum of 3** security issues in the AI-generated code
    - For each issue:
      - What was the issue?
@@ -189,11 +182,11 @@ Write a security report (1–2 pages, markdown format) covering:
      - How did you fix it?
      - What could happen if it was deployed unfixed?
 
-3. **Security Review Template** (4 pts)
+3. **Security Review Template** 
    - Complete the security review template from `resources/security-review-template.md`
    - Include it in your submission
 
-4. **Reflection** (4 pts)
+4. **Reflection** 
    - Would you trust AI to write production auth code without review? Why or why not?
    - What surprised you about the AI-generated auth code?
    - What would you do differently next time?
@@ -218,13 +211,13 @@ Submit the following to the course assignment page:
 
 | Category | Criteria | Points |
 |---|---|---|
-| **Part 1** | | **40** |
+| **Part 1** | 
 | | Vulnerability 1: JWT/localStorage fix with explanation | 8 |
 | | Vulnerability 2: PKCE implementation with explanation | 8 |
 | | Vulnerability 3: Token validation middleware with explanation | 8 |
 | | Vulnerability 4: Client secret moved server-side with explanation | 8 |
 | | Vulnerability 5: HTTPS redirect with HSTS with explanation | 8 |
-| **Part 2** | | **40** |
+| **Part 2** | 
 | | Auth Code flow with PKCE implemented correctly | 8 |
 | | Secure token storage | 6 |
 | | Login flow works end-to-end | 6 |
@@ -232,7 +225,7 @@ Submit the following to the course assignment page:
 | | Token refresh handles expiration | 6 |
 | | Front-end route protection (2+ routes) | 4 |
 | | API endpoint protection with 401 (2+ endpoints) | 6 |
-| **Part 3** | | **20** |
+| **Part 3** | 
 | | AI tools and prompts documented | 2 |
 | | 3+ security issues identified and explained | 10 |
 | | Security review template completed | 4 |
