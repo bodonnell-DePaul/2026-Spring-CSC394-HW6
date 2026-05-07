@@ -226,11 +226,6 @@ Submit the following to the course assignment page:
 | **Part 3** | Security review template completed |
 | **Part 3** | Thoughtful reflection |
 
-### Late Policy
-
-- 10% deduction per day late, up to 3 days
-- No submissions accepted after 3 days without prior approval
-- Security report and prompt log are **required** — missing either results in a deduction
 
 ---
 
