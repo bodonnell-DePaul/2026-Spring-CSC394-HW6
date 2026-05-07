@@ -1,0 +1,16 @@
+{
+  "name": "insecure-auth-app",
+  "version": "1.0.0",
+  "description": "Intentionally insecure React + ASP.NET Core auth app for CSC 436 HW5 - DO NOT deploy to production",
+  "private": true,
+  "scripts": {
+    "postinstall": "npm install --prefix frontend",
+    "start": "concurrently \"dotnet run --project backend/InsecureAuthApp.Api.csproj\" \"npm run dev --prefix frontend\"",
+    "start:backend": "dotnet run --project backend/InsecureAuthApp.Api.csproj",
+    "start:frontend": "npm run dev --prefix frontend",
+    "build": "dotnet build backend/InsecureAuthApp.Api.csproj && npm run build --prefix frontend"
+  },
+  "devDependencies": {
+    "concurrently": "latest"
+  }
+}
