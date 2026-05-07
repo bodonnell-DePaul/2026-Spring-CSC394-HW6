@@ -14,7 +14,7 @@ Authentication is the most security-critical feature in any web application. A s
 
 ## Part 1: Fix the Insecure Auth App 
 
-You are provided a React front end and ASP.NET Core backend in `insecure-auth-app/` that simulate an OAuth-based authentication system. It contains **5 intentional security vulnerabilities**. Your job is to find each one, explain why it's dangerous, and fix it.
+You are provided a React front end and ASP.NET Core backend in `insecure-auth-app/` that simulate an OAuth-based authentication system. It contains **5 intentional security vulnerabilities**. Your job is to identify, explain, and fix each one.
 
 ### Setup
 
@@ -24,7 +24,7 @@ npm install
 npm start
 ```
 
-Open `http://localhost:5173` in your browser. The React front end runs on port 5173 and the ASP.NET Core backend runs on port 5000. Explore the login flow, dashboard, reports route, and API endpoints.
+Open `http://localhost:5173` in your browser. The React front end runs on port 5173 and the ASP.NET Core backend runs on port 5000. Explore the login flow, dashboard, reports route, and API endpoints before making changes.
 
 > Requirements: Node.js 20+ and .NET SDK 8+.
 
@@ -40,7 +40,7 @@ Open `http://localhost:5173` in your browser. The React front end runs on port 5
 
 ### Vulnerabilities to Fix
 
-#### Vulnerability 1: JWT in localStorage with No Expiration Check (8 pts)
+#### Vulnerability 1: JWT in localStorage with No Expiration Check
 
 The app stores JWTs in `localStorage` and never checks if they are expired before using them.
 
@@ -53,7 +53,7 @@ The app stores JWTs in `localStorage` and never checks if they are expired befor
 - Move token storage to a more secure mechanism (e.g., `httpOnly` cookies).
 - Ensure expired tokens are cleared and the user is redirected to login.
 
-#### Vulnerability 2: Missing PKCE in OAuth Flow (8 pts)
+#### Vulnerability 2: Missing PKCE in OAuth Flow
 
 The OAuth implementation for a Single Page Application does not use PKCE (Proof Key for Code Exchange).
 
@@ -68,7 +68,7 @@ The OAuth implementation for a Single Page Application does not use PKCE (Proof 
 - Send `code_verifier` in the token exchange request.
 - Validate the verifier against the challenge on the server side.
 
-#### Vulnerability 3: Unvalidated API Endpoint (8 pts)
+#### Vulnerability 3: Unvalidated API Endpoint
 
 The `GET /api/user/profile` endpoint does not validate the access token — it trusts whatever is sent.
 
@@ -81,7 +81,7 @@ The `GET /api/user/profile` endpoint does not validate the access token — it t
 - Return `401 Unauthorized` if the token is missing, invalid, or expired.
 - Extract user info only from the validated token, not from unverified request data.
 
-#### Vulnerability 4: Hardcoded Client Secret in Front-End (8 pts)
+#### Vulnerability 4: Hardcoded Client Secret in Front-End
 
 The OAuth `client_secret` is hardcoded in the React code that is served to the browser.
 
@@ -94,7 +94,7 @@ The OAuth `client_secret` is hardcoded in the React code that is served to the b
 - Keep all confidential OAuth client credential handling on the ASP.NET Core backend.
 - Verify the secret is not present in any file served to the browser.
 
-#### Vulnerability 5: Missing HTTPS Redirect (8 pts)
+#### Vulnerability 5: Missing HTTPS Redirect
 
 The app does not enforce HTTPS in production.
 
@@ -120,7 +120,7 @@ For **each** vulnerability, include in your submission:
 
 ## Part 2: Implement OAuth/OIDC in `insecure-auth-app/` 
 
-Implement OAuth 2.0 / OpenID Connect authentication in the same `insecure-auth-app/` React + ASP.NET Core application. Do not move this part to a separate course project. Your final app should replace or extend the mock OAuth flow with a real provider integration while keeping the React front end and ASP.NET Core backend architecture.
+Implement OAuth 2.0 / OpenID Connect authentication in the same `insecure-auth-app/` React + ASP.NET Core application. Do not move this part to a separate course project. Your final app should remain inside this repository.
 
 ### Choose a Provider
 
@@ -130,15 +130,13 @@ Pick one:
 
 ### Requirements
 
-| Requirement | Points |
-|---|---|
-| Authorization Code flow with PKCE | 8 |
-| Secure token storage (NOT localStorage) | 6 |
-| Login flow (redirect → callback → store tokens) | 6 |
-| Logout (clear tokens, revoke if supported) | 4 |
-| Token refresh (handle expiration gracefully) | 6 |
-| Protect at least 2 front-end routes | 4 |
-| Protect at least 2 API endpoints (return 401) | 6 |
+- Authorization Code flow with PKCE
+- Secure token storage (NOT localStorage)
+- Login flow (redirect → callback → store tokens)
+- Logout (clear tokens, revoke if supported)
+- Token refresh (handle expiration gracefully)
+- Protect at least 2 front-end routes
+- Protect at least 2 API endpoints (return 401)
 
 ### Implementation Checklist
 
@@ -177,10 +175,10 @@ Write a security report (1–2 pages, markdown format) covering:
 2. **Security Issues Found in AI-Generated Code** 
    - Identify a **minimum of 3** security issues in the AI-generated code
    - For each issue:
-     - What was the issue?
-     - Why is it a security risk?
-     - How did you fix it?
-     - What could happen if it was deployed unfixed?
+      - What was the issue?
+      - Why is it a security risk?
+      - How did you fix it?
+      - What could happen if it was deployed unfixed?
 
 3. **Security Review Template** 
    - Complete the security review template from `resources/security-review-template.md`
@@ -209,34 +207,30 @@ Submit the following to the course assignment page:
 
 ## Grading Rubric
 
-| Category | Criteria | Points |
-|---|---|---|
-| **Part 1** | 
-| | Vulnerability 1: JWT/localStorage fix with explanation | 8 |
-| | Vulnerability 2: PKCE implementation with explanation | 8 |
-| | Vulnerability 3: Token validation middleware with explanation | 8 |
-| | Vulnerability 4: Client secret moved server-side with explanation | 8 |
-| | Vulnerability 5: HTTPS redirect with HSTS with explanation | 8 |
-| **Part 2** | 
-| | Auth Code flow with PKCE implemented correctly | 8 |
-| | Secure token storage | 6 |
-| | Login flow works end-to-end | 6 |
-| | Logout clears tokens properly | 4 |
-| | Token refresh handles expiration | 6 |
-| | Front-end route protection (2+ routes) | 4 |
-| | API endpoint protection with 401 (2+ endpoints) | 6 |
-| **Part 3** | 
-| | AI tools and prompts documented | 2 |
-| | 3+ security issues identified and explained | 10 |
-| | Security review template completed | 4 |
-| | Thoughtful reflection | 4 |
-| **Total** | | **100** |
+| Category | Criteria |
+|---|---|
+| **Part 1** | Vulnerability 1: JWT/localStorage fix with explanation |
+| **Part 1** | Vulnerability 2: PKCE implementation with explanation |
+| **Part 1** | Vulnerability 3: Token validation middleware with explanation |
+| **Part 1** | Vulnerability 4: Client secret moved server-side with explanation |
+| **Part 1** | Vulnerability 5: HTTPS redirect with HSTS with explanation |
+| **Part 2** | Auth Code flow with PKCE implemented correctly |
+| **Part 2** | Secure token storage |
+| **Part 2** | Login flow works end-to-end |
+| **Part 2** | Logout clears tokens properly |
+| **Part 2** | Token refresh handles expiration |
+| **Part 2** | Front-end route protection (2+ routes) |
+| **Part 2** | API endpoint protection with 401 (2+ endpoints) |
+| **Part 3** | AI tools and prompts documented |
+| **Part 3** | 3+ security issues identified and explained |
+| **Part 3** | Security review template completed |
+| **Part 3** | Thoughtful reflection |
 
 ### Late Policy
 
 - 10% deduction per day late, up to 3 days
 - No submissions accepted after 3 days without prior approval
-- Security report and prompt log are **required** — missing either results in a 10-point deduction
+- Security report and prompt log are **required** — missing either results in a deduction
 
 ---
 
@@ -253,4 +247,4 @@ Submit the following to the course assignment page:
 
 ## Academic Integrity
 
-This is an individual assignment. You may discuss concepts with classmates, but all code and writing must be your own. AI-generated code must be reviewed, understood, and documented. Submitting AI-generated code without review or documentation is a violation of academic integrity.
+This is an individual assignment. You may discuss concepts with classmates, but all code and writing must be your own. AI-generated code must be reviewed, understood, and documented. Submitting AI output without review is an academic integrity violation.
